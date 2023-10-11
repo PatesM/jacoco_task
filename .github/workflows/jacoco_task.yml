@@ -1,0 +1,25 @@
+name: jacoco_task
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Run test
+      run: gradle build test
+      
+    - name: Test Coverage Verification
+      run: gradle build jacocoTestCoverageVerification
+
+    - name: Build
+      run: gradle build
+    
