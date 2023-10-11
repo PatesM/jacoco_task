@@ -24,8 +24,7 @@ public class BoundaryServiceTest {
     @ParameterizedTest(name = "Getting the minimum value")
     @MethodSource("getCatalog_argsProviderFactory")
     public void getCatalog_shouldGetListTitlesOfArticles(int[] marks, int minValueExpected) {
-        System.out.println("Low test coverage BoundaryServiceTest");
-//        int minValueActual = boundaryService.findMin(marks);
-//        Assertions.assertEquals(minValueExpected, minValueActual);
+        int minValueActual = boundaryService.findMin(marks);
+        Assertions.assertEquals(minValueExpected, minValueActual);
     }
 }
