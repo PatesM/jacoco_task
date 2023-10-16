@@ -1,30 +1,23 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 import org.maxqa.BoundaryService;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
 
-@DisplayName("Testing the implementation of the BoundaryService class")
+@Story(value = "Testing the implementation of the BoundaryService class")
 public class BoundaryServiceTest {
     private final BoundaryService boundaryService = new BoundaryService();
 
-    static Stream<Arguments> getCatalog_argsProviderFactory() {
-        return Stream.of(
-                Arguments.of(
-                        new int[]{5, 4, 3, 2, 1},
-                        1
-                )
-        );
-    }
-
-    @DisplayName("Testing the findMin method")
-    @ParameterizedTest(name = "Getting the minimum value")
-    @MethodSource("getCatalog_argsProviderFactory")
-    public void getCatalog_shouldGetListTitlesOfArticles(int[] marks, int minValueExpected) {
-        int minValueActual = boundaryService.findMin(marks);
-        Assertions.assertEquals(minValueExpected, minValueActual);
+    @Test
+    @DisplayName("Getting the minimum value")
+    @Description("Should return the minimum value")
+    public void getCatalog() {
+        int[] values = {5, 4, 3, 2, 1};
+        int expectedResult = Arrays.stream(values).min().getAsInt();
+        int actualResult = boundaryService.findMin(values);
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 }
